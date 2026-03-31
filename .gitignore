@@ -1,0 +1,9 @@
+node_modules/
+build/
+.env
+.env.local
+serviceAccountKey.json
+skillpath-ai-4b6f0-f38f327aac80.json
+*.log
+.DS_Store
+Thumbs.db
