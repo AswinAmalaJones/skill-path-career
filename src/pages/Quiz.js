@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { doc, updateDoc, getDoc, arrayUnion } from "firebase/firestore";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../firebase";
 
 const QUIZ_DATA = [
   { topic: "HTML Basics", questions: [
@@ -119,6 +121,10 @@ function Quiz() {
       cri: newCri,
       completedQuizzes: arrayUnion(parseInt(index))
     });
+
+    if (analytics) {
+      logEvent(analytics, "quiz_submitted");
+    }
   };
 
   if (done) return (

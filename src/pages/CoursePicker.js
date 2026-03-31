@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { generateCourseRoadmap } from "../services/aiService";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../firebase";
 
 const POPULAR = [
   "Python", "Data Science", "Machine Learning",
@@ -73,6 +75,12 @@ function CoursePicker() {
       await updateDoc(doc(db, "users", user.uid), {
         courses: [...existing, newCourse],
       });
+
+      if (analytics) {
+        logEvent(analytics, "course_selected", {
+          course_name: name
+        });
+      }
 
       navigate(`/course/${encodeURIComponent(name)}`);
     } catch (e) {

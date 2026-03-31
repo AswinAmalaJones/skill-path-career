@@ -14,6 +14,8 @@ import SkillBadges from "../components/SkillBadges";
 import StreakCalendar from "../components/StreakCalendar";
 import DailyReminder from "../components/DailyReminder";
 import WeeklyTest from "../components/WeeklyTest";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../firebase";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
@@ -200,6 +202,10 @@ function Dashboard() {
         criHistory: [...criHistory.slice(-6), todayEntry],
       });
 
+      if (analytics) {
+        logEvent(analytics, "task_completed");
+      }
+      
       setCompleted(true);
     } catch (err) {
       console.error("Submit error:", err);

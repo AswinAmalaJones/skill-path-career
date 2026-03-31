@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getAnalytics, isSupported } from "firebase/analytics";
 
-// 🔥 PASTE YOUR FIREBASE CONFIG HERE
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// 🔥 Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyAm4mcPKkaYhzJyu4OqrimMeglxwexu4WI",
   authDomain: "skillpath-ai-4b6f0.firebaseapp.com",
@@ -14,11 +14,22 @@ const firebaseConfig = {
   measurementId: "G-06QZQCBS3K"
 };
 
-// Initialize Firebase
+// ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// 🔐 Auth (Login / Register / Forgot password)
+// 🔐 Auth
 export const auth = getAuth(app);
 
-// 🗄️ Firestore (User data)
+// 🗄️ Firestore
 export const db = getFirestore(app);
+
+// 📊 Analytics (safe initialization)
+let analytics = null;
+
+isSupported().then((yes) => {
+  if (yes) {
+    analytics = getAnalytics(app);
+  }
+});
+
+export { analytics };

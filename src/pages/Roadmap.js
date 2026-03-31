@@ -5,6 +5,8 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { generateRoadmap } from "../services/aiService";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../firebase";
 
 function Roadmap() {
   const [cri, setCri] = useState(0);
@@ -31,6 +33,11 @@ function Roadmap() {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (user) => {
       if (!user) { navigate("/"); return; }
+
+      if (analytics) {
+        logEvent(analytics, "roadmap_viewed");
+      }
+      
       const snap = await getDoc(doc(db, "users", user.uid));
       if (snap.exists()) {
         const data = snap.data();

@@ -6,6 +6,8 @@ import {
   sendPasswordResetEmail
 } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../firebase";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -23,6 +25,10 @@ function Login() {
     try {
       setLoading(true);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+      if (analytics) {
+        logEvent(analytics, "login");
+      }
 
       // Email verified check
       if (!userCredential.user.emailVerified) {
