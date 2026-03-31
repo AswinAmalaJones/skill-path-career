@@ -4,6 +4,7 @@ import App from "./App";
 import "./index.css";
 import "./App.css";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import "./responsive.css"; // ← add pannuu
 
 const _origError = window.console.error;
 window.console.error = (...args) => {
