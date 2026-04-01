@@ -260,7 +260,7 @@ function Dashboard() {
     <div className="app-wrapper">
       {/* Top Bar */}
       <div className="top-bar">
-        <h2>🎯 SkillPath AI</h2>
+        <h2>🎯 SkillPath Career</h2>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <span className="level-badge">LVL {level}</span>
           <button className="back-btn" onClick={handleLogout}>Logout</button>

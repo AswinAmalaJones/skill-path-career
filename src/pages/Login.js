@@ -74,14 +74,14 @@ function Login() {
         <div style={{ textAlign: "center", marginBottom: "8px" }}>
           <span style={{ fontSize: "40px" }}>🎯</span>
         </div>
-        <h2>SkillPath AI</h2>
+        <h2>SkillPath Career Learning App</h2>
         <p style={{
           color: "#64748b",
           fontSize: "13px",
           textAlign: "center",
           marginBottom: "20px"
         }}>
-          Your AI-powered career learning platform
+          Your career learning platform
         </p>
 
         {error && (

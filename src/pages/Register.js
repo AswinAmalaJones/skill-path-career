@@ -78,7 +78,7 @@ function Register() {
           textAlign: "center",
           marginBottom: "20px"
         }}>
-          Join SkillPath AI — Start your career journey!
+          Join SkillPath Career — Start your career journey!
         </p>
 
         {message && (
